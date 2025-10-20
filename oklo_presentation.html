@@ -791,11 +791,11 @@
                     particlesBg.appendChild(star);
                 }
 
-                // Create nuclear atoms (4 smaller glowing orbs)
+                // Create nuclear atoms (4 tiny glowing orbs)
                 for (let i = 0; i < 4; i++) {
                     const atom = document.createElement('div');
                     atom.className = 'particle atom';
-                    const size = Math.random() * 20 + 30; // 30-50px atoms (reduced from 80-140px)
+                    const size = Math.random() * 6 + 9; // 9-15px atoms (70% smaller than 30-50px)
                     atom.style.width = size + 'px';
                     atom.style.height = size + 'px';
                     atom.style.left = Math.random() * 100 + '%';
