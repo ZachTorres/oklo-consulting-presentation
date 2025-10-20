@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oklo Technical Services - Nuclear Consulting Opportunity</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/black.css">
+
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <!-- Custom CSS for Oklo branding -->
+    <style>
+        :root {
+            --oklo-navy: #003366;
+            --oklo-teal: #48C9B0;
+            --oklo-light-blue: #5DADE2;
+            --oklo-white: #FFFFFF;
+            --oklo-black: #000000;
+            --oklo-gray: #B0B0B0;
+        }
+
+        .reveal {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            color: var(--oklo-white);
+            text-transform: none;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .reveal h1 {
+            font-size: 3em;
+            line-height: 1.2;
+        }
+
+        .reveal h2 {
+            font-size: 2.2em;
+            color: var(--oklo-teal);
+        }
+
+        .reveal h3 {
+            font-size: 1.6em;
+            color: var(--oklo-light-blue);
+        }
+
+        .reveal p, .reveal li {
+            color: var(--oklo-white);
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .reveal strong {
+            color: var(--oklo-teal);
+            font-weight: 700;
+        }
+
+        .reveal .slides section {
+            padding: 40px;
+        }
+
+        /* Oklo branding elements */
+        .oklo-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.8em;
+            font-weight: 900;
+            color: var(--oklo-teal);
+            letter-spacing: 0.15em;
+            z-index: 100;
+        }
+
+        /* Oklo logo for title slide */
+        .oklo-logo-main {
+            width: 300px;
+            height: auto;
+            margin: 0 auto 40px auto;
+            display: block;
+        }
+
+        .oklo-logo-svg {
+            width: 200px;
+            margin: 0 auto 30px;
+            display: block;
+        }
+
+        .oklo-footer {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            color: var(--oklo-teal);
+            opacity: 0.7;
+        }
+
+        /* Animated background particles */
+        .particles-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--oklo-teal) 0%, transparent 70%);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-50px) translateX(-50px); }
+            75% { transform: translateY(-150px) translateX(25px); }
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: rgba(72, 201, 176, 0.15);
+            border: 3px solid var(--oklo-teal);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 8px 32px rgba(72, 201, 176, 0.3);
+        }
+
+        .emphasis-text {
+            font-size: 2em;
+            color: var(--oklo-teal);
+            font-weight: 700;
+            text-shadow: none;
+        }
+
+        /* Three column layout */
+        .three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .col-item {
+            background: rgba(74, 144, 226, 0.1);
+            border: 2px solid var(--oklo-light-blue);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .col-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.4);
+            border-color: var(--oklo-teal);
+        }
+
+        /* Stats display */
+        .stat-number {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: var(--oklo-teal);
+            line-height: 1;
+            text-shadow: none;
+        }
+
+        .stat-label {
+            font-size: 1.2em;
+            color: var(--oklo-light-blue);
+            margin-top: 10px;
+        }
+
+        /* Chart container */
+        .chart-container {
+            position: relative;
+            height: 500px;
+            width: 100%;
+            margin: 30px auto;
+        }
+
+        /* Timeline styling */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--oklo-teal) 0%, var(--oklo-light-blue) 100%);
+            z-index: -1;
+        }
+
+        .timeline-item {
+            background: rgba(0, 51, 102, 0.9);
+            border: 3px solid var(--oklo-teal);
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 150px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(72, 201, 176, 0.3);
+        }
+
+        /* Grid layout for quadrants */
+        .quad-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .quad-item {
+            background: rgba(72, 201, 176, 0.1);
+            border: 2px solid var(--oklo-teal);
+            border-radius: 12px;
+            padding: 30px;
+            min-height: 200px;
+        }
+
+        /* Hub-spoke diagram */
+        .hub-spoke {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hub {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, var(--oklo-teal) 0%, var(--oklo-navy) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: 700;
+            z-index: 10;
+            box-shadow: 0 5px 20px rgba(72, 201, 176, 0.3);
+            text-align: center;
+            padding: 15px;
+        }
+
+        .spoke {
+            position: absolute;
+            background: rgba(74, 144, 226, 0.15);
+            border: 2px solid var(--oklo-light-blue);
+            border-radius: 10px;
+            padding: 15px;
+            width: 160px;
+            text-align: center;
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+
+        /* Funnel visualization */
+        .funnel {
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        .funnel-level {
+            background: linear-gradient(90deg, rgba(72, 201, 176, 0.3) 0%, rgba(74, 144, 226, 0.3) 100%);
+            border: 2px solid var(--oklo-teal);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px auto;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .funnel-level:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(72, 201, 176, 0.4);
+        }
+
+        .funnel-level:nth-child(1) { width: 100%; }
+        .funnel-level:nth-child(2) { width: 80%; }
+        .funnel-level:nth-child(3) { width: 60%; }
+
+        /* Risk matrix */
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .risk-item {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+        }
+
+        .risk-low {
+            background: rgba(72, 201, 176, 0.3);
+            border: 3px solid var(--oklo-teal);
+        }
+
+        .risk-medium {
+            background: rgba(255, 193, 7, 0.3);
+            border: 3px solid #FFC107;
+            color: #FFE082;
+        }
+
+        .risk-item:hover {
+            transform: scale(1.08);
+            box-shadow: 0 5px 20px rgba(72, 201, 176, 0.3);
+        }
+
+        /* Fragment animations */
+        .fragment.fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .fragment.fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+
+        /* Subtle glow effect */
+        .glow {
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px rgba(72, 201, 176, 0.3); }
+            to { text-shadow: 0 0 10px rgba(72, 201, 176, 0.5); }
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Title -->
+            <section data-transition="zoom" data-background-color="#000000">
+                <!-- Oklo Logo from your screenshot -->
+                <img src="oklo-logo.png"
+                     alt="Oklo Logo"
+                     style="width: 350px; height: auto; margin: 0 auto 40px; display: block; filter: brightness(1.2);">
+
+                <h1 style="margin-top: 40px;">From Reactors to Revenue</h1>
+                <h3 style="color: #48C9B0; margin-top: 30px; font-size: 1.4em; line-height: 1.4;">
+                    Nuclear Consulting as Oklo's Bridge to Profitability
+                </h3>
+                <p style="margin-top: 60px; font-size: 0.9em; color: #5DADE2;">Business 4900 | Data Story Project</p>
+            </section>
+
+            <!-- Slide 2: Data POV Statement -->
+            <section data-transition="convex">
+                <div class="oklo-logo">OKLO</div>
+                <h2>The Opportunity</h2>
+                <div class="highlight-box">
+                    <p class="fragment fade-up" style="font-size: 1.1em; margin: 15px 0;"><strong>80+ new nuclear startups</strong> have entered the microreactor market</p>
+                    <p class="fragment fade-up" style="font-size: 1.1em; margin: 15px 0;">Oklo can transform from a <strong>pre-revenue reactor builder</strong></p>
+                    <p class="fragment fade-up" style="font-size: 1.1em; margin: 15px 0;">Into the ecosystem's <strong>technical backbone</strong></p>
+                    <p class="fragment fade-up" style="font-size: 1.1em; margin: 15px 0;">Offering <strong>simulation, safety, and regulatory consulting</strong></p>
+                    <p class="fragment fade-up" style="font-size: 1.3em; color: #48C9B0; margin-top: 30px;">
+                        Result: <strong>Immediate, scalable revenue</strong>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 3: The Problem - Animated Chart -->
+            <section data-transition="slide">
+                <div class="oklo-logo">OKLO</div>
+                <h2>The Problem: Crowded Market</h2>
+                <p>Nuclear startup funding is concentrated among few players</p>
+                <div class="chart-container">
+                    <canvas id="fundingChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Slide 4: The Insight -->
+            <section data-transition="concave" data-auto-animate>
+                <div class="oklo-logo">OKLO</div>
+                <h2 data-auto-animate>But Here's What They All Need...</h2>
+                <div class="three-col" style="margin-top: 60px;">
+                    <div class="col-item fragment fade-up" data-fragment-index="1">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Years of licensing</div>
+                    </div>
+                    <div class="col-item fragment fade-up" data-fragment-index="2">
+                        <div class="stat-number">$50M+</div>
+                        <div class="stat-label">In regulatory costs</div>
+                    </div>
+                    <div class="col-item fragment fade-up" data-fragment-index="3">
+                        <div class="stat-number">Zero</div>
+                        <div class="stat-label">Reactor experience</div>
+                    </div>
+                </div>
+                <p class="fragment" data-fragment-index="4" style="margin-top: 50px; font-size: 1.5em; color: #48C9B0;">
+                    <strong>Oklo has already done this.</strong>
+                </p>
+            </section>
+
+            <!-- Slide 5: The Solution - Three Service Lines -->
+            <section data-transition="zoom">
+                <div class="oklo-logo">OKLO</div>
+                <h2>The Solution: Three Service Lines</h2>
+                <div class="three-col" style="margin-top: 40px;">
+                    <div class="col-item fragment" data-fragment-index="1">
+                        <h3 style="color: #48C9B0; font-size: 1.3em; margin-bottom: 15px;">Licensing &<br>Regulatory</h3>
+                        <p style="font-size: 0.85em; line-height: 1.5;">NRC application support, safety case development</p>
+                        <div class="stat-number" style="font-size: 2em; margin-top: 20px;">$75M</div>
+                        <div class="stat-label" style="font-size: 1em;">2030 Revenue</div>
+                    </div>
+                    <div class="col-item fragment" data-fragment-index="2">
+                        <h3 style="color: #48C9B0; font-size: 1.3em; margin-bottom: 15px;">Safety &<br>Simulation</h3>
+                        <p style="font-size: 0.85em; line-height: 1.5;">Thermal-hydraulics modeling, accident analysis</p>
+                        <div class="stat-number" style="font-size: 2em; margin-top: 20px;">$42M</div>
+                        <div class="stat-label" style="font-size: 1em;">2030 Revenue</div>
+                    </div>
+                    <div class="col-item fragment" data-fragment-index="3">
+                        <h3 style="color: #48C9B0; font-size: 1.3em; margin-bottom: 15px;">Fuel Cycle</h3>
+                        <p style="font-size: 0.85em; line-height: 1.5;">HALEU sourcing, enrichment strategy</p>
+                        <div class="stat-number" style="font-size: 2em; margin-top: 20px;">$23M</div>
+                        <div class="stat-label" style="font-size: 1em;">2030 Revenue</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Market Size - Funnel -->
+            <section data-transition="slide">
+                <div class="oklo-logo">OKLO</div>
+                <h2>The Market Size</h2>
+                <div class="funnel" style="max-width: 480px; margin-top: 15px;">
+                    <div class="funnel-level fragment" data-fragment-index="1" style="padding: 14px;">
+                        <div class="emphasis-text" style="font-size: 1.5em;">$6.2B</div>
+                        <p style="margin-top: 6px; font-size: 0.9em;"><strong>TAM</strong> - Total Addressable Market</p>
+                        <p style="font-size: 0.75em; margin-top: 2px; line-height: 1.3;">Global microreactor licensing</p>
+                    </div>
+                    <div class="funnel-level fragment" data-fragment-index="2" style="padding: 14px;">
+                        <div class="emphasis-text" style="font-size: 1.4em;">$1.9B</div>
+                        <p style="margin-top: 6px; font-size: 0.9em;"><strong>SAM</strong> - Serviceable Available Market</p>
+                        <p style="font-size: 0.75em; margin-top: 2px; line-height: 1.3;">U.S. + allied nations</p>
+                    </div>
+                    <div class="funnel-level fragment" data-fragment-index="3" style="padding: 14px;">
+                        <div class="emphasis-text" style="font-size: 1.3em;">$570M</div>
+                        <p style="margin-top: 6px; font-size: 0.9em;"><strong>SOM</strong> - Serviceable Obtainable Market</p>
+                        <p style="font-size: 0.75em; margin-top: 2px; line-height: 1.3;">30% market share by 2030</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 7: Revenue Projections - Animated Area Chart -->
+            <section data-transition="convex">
+                <div class="oklo-logo">OKLO</div>
+                <h2>5-Year Revenue Projection</h2>
+                <p>Path to $140M in annual consulting revenue</p>
+                <div class="chart-container">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Slide 8: Financial Model -->
+            <section data-transition="zoom">
+                <div class="oklo-logo">OKLO</div>
+                <h2>The Financial Model</h2>
+                <div class="highlight-box" style="margin-top: 50px;">
+                    <div class="fragment fade-up">
+                        <p style="font-size: 1.3em;"><strong>Revenue Model:</strong></p>
+                        <p>$800K - $2M per client per year</p>
+                    </div>
+                    <div class="fragment fade-up" style="margin-top: 30px;">
+                        <p style="font-size: 1.3em;"><strong>Cost Structure:</strong></p>
+                        <p>60-70% personnel | 30-40% EBITDA margin</p>
+                    </div>
+                    <div class="fragment fade-up" style="margin-top: 30px;">
+                        <p style="font-size: 1.3em;"><strong>Team:</strong></p>
+                        <p>10 experts in 2026 → 45 experts by 2030</p>
+                    </div>
+                    <div class="fragment fade-up" style="margin-top: 30px;">
+                        <p class="emphasis-text" style="font-size: 1.8em;">$42M in EBITDA by 2030</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Timeline -->
+            <section data-transition="slide">
+                <div class="oklo-logo">OKLO</div>
+                <h2>Implementation Timeline</h2>
+                <div class="timeline" style="margin-top: 80px;">
+                    <div class="timeline-item fragment" data-fragment-index="1">
+                        <h3 style="font-size: 1.2em; color: #48C9B0;">Q1-Q2 2026</h3>
+                        <p style="font-size: 0.9em; margin-top: 10px;">Launch<br>First 3 clients</p>
+                    </div>
+                    <div class="timeline-item fragment" data-fragment-index="2">
+                        <h3 style="font-size: 1.2em; color: #48C9B0;">Q3-Q4 2026</h3>
+                        <p style="font-size: 0.9em; margin-top: 10px;">Scale<br>10 clients</p>
+                    </div>
+                    <div class="timeline-item fragment" data-fragment-index="3">
+                        <h3 style="font-size: 1.2em; color: #48C9B0;">2027-2028</h3>
+                        <p style="font-size: 0.9em; margin-top: 10px;">Expand<br>30 clients</p>
+                    </div>
+                    <div class="timeline-item fragment" data-fragment-index="4">
+                        <h3 style="font-size: 1.2em; color: #48C9B0;">2029-2030</h3>
+                        <p style="font-size: 0.9em; margin-top: 10px;">Dominate<br>50+ clients</p>
+                    </div>
+                </div>
+                <p class="fragment" data-fragment-index="5" style="margin-top: 80px; font-size: 1.2em; color: #4A90E2;">
+                    <strong>6-month setup → 4.5 years of growth</strong>
+                </p>
+            </section>
+
+            <!-- Slide 10: Strategic Benefits - Hub-Spoke -->
+            <section data-transition="zoom">
+                <div class="oklo-logo">OKLO</div>
+                <h2>Strategic Benefits</h2>
+                <div class="hub-spoke" style="height: 550px;">
+                    <div class="hub" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">OKLO<br>ADVANTAGE</div>
+
+                    <!-- Top spoke -->
+                    <div class="spoke fragment" style="top: 5%; left: 50%; transform: translateX(-50%);" data-fragment-index="1">
+                        <strong>Immediate Revenue</strong><br>
+                        <span style="font-size: 0.85em;">Cash flow 2026</span>
+                    </div>
+
+                    <!-- Top-right spoke -->
+                    <div class="spoke fragment" style="top: 18%; right: 8%;" data-fragment-index="2">
+                        <strong>Market Intel</strong><br>
+                        <span style="font-size: 0.85em;">Competitor insights</span>
+                    </div>
+
+                    <!-- Bottom-right spoke -->
+                    <div class="spoke fragment" style="bottom: 18%; right: 8%;" data-fragment-index="3">
+                        <strong>Brand Authority</strong><br>
+                        <span style="font-size: 0.85em;">Thought leader</span>
+                    </div>
+
+                    <!-- Bottom spoke -->
+                    <div class="spoke fragment" style="bottom: 5%; left: 50%; transform: translateX(-50%);" data-fragment-index="4">
+                        <strong>Talent Retention</strong><br>
+                        <span style="font-size: 0.85em;">Monetize team</span>
+                    </div>
+
+                    <!-- Bottom-left spoke -->
+                    <div class="spoke fragment" style="bottom: 18%; left: 8%;" data-fragment-index="5">
+                        <strong>De-Risk Business</strong><br>
+                        <span style="font-size: 0.85em;">Diversify revenue</span>
+                    </div>
+
+                    <!-- Top-left spoke -->
+                    <div class="spoke fragment" style="top: 18%; left: 8%;" data-fragment-index="6">
+                        <strong>Network Effects</strong><br>
+                        <span style="font-size: 0.85em;">Client pipeline</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: Competitive Advantages -->
+            <section data-transition="convex">
+                <div class="oklo-logo">OKLO</div>
+                <h2>Why Oklo Wins</h2>
+                <div class="quad-grid" style="margin-top: 40px;">
+                    <div class="quad-item fragment" data-fragment-index="1">
+                        <h3 style="color: #48C9B0; font-size: 1.4em; margin-bottom: 12px;">First-Hand Experience</h3>
+                        <p style="margin-top: 10px; font-size: 1em; line-height: 1.5;">Only company with NRC combined license application experience</p>
+                    </div>
+                    <div class="quad-item fragment" data-fragment-index="2">
+                        <h3 style="color: #48C9B0; font-size: 1.4em; margin-bottom: 12px;">Proprietary Models</h3>
+                        <p style="margin-top: 10px; font-size: 1em; line-height: 1.5;">Advanced simulation codes validated through Aurora</p>
+                    </div>
+                    <div class="quad-item fragment" data-fragment-index="3">
+                        <h3 style="color: #48C9B0; font-size: 1.4em; margin-bottom: 12px;">Deep Relationships</h3>
+                        <p style="margin-top: 10px; font-size: 1em; line-height: 1.5;">Established NRC connections and regulatory expertise</p>
+                    </div>
+                    <div class="quad-item fragment" data-fragment-index="4">
+                        <h3 style="color: #48C9B0; font-size: 1.4em; margin-bottom: 12px;">Non-Competitive</h3>
+                        <p style="margin-top: 10px; font-size: 1em; line-height: 1.5;">Fast reactor focus = no conflict with thermal clients</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 12: Risks & Mitigation -->
+            <section data-transition="slide">
+                <div class="oklo-logo">OKLO</div>
+                <h2>Risks & Mitigation</h2>
+                <div class="risk-matrix" style="gap: 30px; max-width: 900px; margin: 30px auto;">
+                    <div class="risk-item risk-low fragment" data-fragment-index="1" style="width: 220px; height: 220px; padding: 25px;">
+                        <div>
+                            <strong style="font-size: 1.05em; display: block; margin-bottom: 15px;">Resource<br>Drain</strong>
+                            <span style="font-size: 0.75em; line-height: 1.4;">Separate consulting team</span>
+                        </div>
+                    </div>
+                    <div class="risk-item risk-medium fragment" data-fragment-index="2" style="width: 220px; height: 220px; padding: 25px;">
+                        <div>
+                            <strong style="font-size: 1.05em; display: block; margin-bottom: 15px;">IP<br>Exposure</strong>
+                            <span style="font-size: 0.75em; line-height: 1.4;">NDAs &<br>scope limits</span>
+                        </div>
+                    </div>
+                    <div class="risk-item risk-medium fragment" data-fragment-index="3" style="width: 220px; height: 220px; padding: 25px;">
+                        <div>
+                            <strong style="font-size: 1.05em; display: block; margin-bottom: 15px;">Market<br>Timing</strong>
+                            <span style="font-size: 0.75em; line-height: 1.4;">Pipeline exists</span>
+                        </div>
+                    </div>
+                    <div class="risk-item risk-low fragment" data-fragment-index="4" style="width: 220px; height: 220px; padding: 25px;">
+                        <div>
+                            <strong style="font-size: 1.05em; display: block; margin-bottom: 15px;">Reputation<br>Risk</strong>
+                            <span style="font-size: 0.75em; line-height: 1.4;">Client vetting</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 13: Proof Points -->
+            <section data-transition="zoom" data-auto-animate>
+                <div class="oklo-logo">OKLO</div>
+                <h2>This Has Been Done Before</h2>
+                <div class="three-col" style="margin-top: 40px;">
+                    <div class="col-item fragment" data-fragment-index="1">
+                        <h3 style="color: #4A90E2; font-size: 1.5em;">BWXT</h3>
+                        <p style="margin-top: 15px; font-size: 0.95em; line-height: 1.5;">Naval reactor builder<br>→<br>$3B/year in services</p>
+                    </div>
+                    <div class="col-item fragment" data-fragment-index="2">
+                        <h3 style="color: #4A90E2; font-size: 1.5em;">Framatome</h3>
+                        <p style="margin-top: 15px; font-size: 0.95em; line-height: 1.5;">Reactor vendor<br>→<br>€4B/year in services</p>
+                    </div>
+                    <div class="col-item fragment" data-fragment-index="3">
+                        <h3 style="color: #4A90E2; font-size: 1.5em;">Westinghouse</h3>
+                        <p style="margin-top: 15px; font-size: 0.95em; line-height: 1.5;">50% of revenue<br>from services</p>
+                    </div>
+                </div>
+                <p class="fragment" data-fragment-index="4" style="margin-top: 60px; font-size: 1.3em; color: #48C9B0; line-height: 1.4;">
+                    <strong>Oklo can replicate this in the microreactor market</strong>
+                </p>
+            </section>
+
+            <!-- Slide 14: The Ask -->
+            <section data-transition="convex">
+                <div class="oklo-logo">OKLO</div>
+                <h2>The Decision</h2>
+                <div class="highlight-box" style="margin-top: 40px; padding: 35px;">
+                    <p class="fragment fade-up" style="font-size: 1.4em; line-height: 1.4;"><strong>Launch Oklo Technical Services in Q1 2026</strong></p>
+                    <p class="fragment fade-up" style="margin-top: 25px; font-size: 1.1em; line-height: 1.5;">Initial investment: $2M<br><span style="font-size: 0.9em;">(3 senior engineers, tools, marketing)</span></p>
+                    <p class="fragment fade-up" style="margin-top: 25px; font-size: 1.1em;">Expected return: $4.5M revenue in Year 1</p>
+                    <p class="fragment fade-up" style="margin-top: 25px; font-size: 1.1em;">2x ROI in first 12 months</p>
+                    <div class="fragment fade-up" style="margin-top: 40px;">
+                        <p class="emphasis-text" style="font-size: 2em;">$140M by 2030</p>
+                        <p style="font-size: 1.15em; color: #4A90E2; margin-top: 12px; line-height: 1.4;">While building Aurora reactors in parallel</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 15: Closing -->
+            <section data-transition="zoom" data-background-color="#000000">
+                <div class="oklo-logo">OKLO</div>
+                <h1 style="margin-top: 120px; font-size: 2.8em; line-height: 1.3;">Turn Expertise into Revenue</h1>
+                <p style="font-size: 1.8em; margin-top: 50px; color: white;">
+                    <strong>Oklo Technical Services</strong>
+                </p>
+                <p style="font-size: 1.2em; margin-top: 30px; color: #B0B0B0; line-height: 1.5;">
+                    Nuclear consulting for the new generation
+                </p>
+                <p style="margin-top: 100px; font-size: 1.3em; color: #48C9B0;">
+                    Questions?
+                </p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            controls: true,
+            progress: true,
+            center: true,
+            slideNumber: true,
+            plugins: [ RevealNotes ],
+
+            // Auto-slide configuration (optional - remove if you want manual control)
+            // autoSlide: 40000, // 40 seconds per slide for 10-minute presentation
+            // loop: false,
+
+            // View configuration - consistent scaling for all slides
+            width: 1920,
+            height: 1080,
+            margin: 0.08,  // Increased margin to prevent cutoffs
+            minScale: 0.2,
+            maxScale: 2.0,
+        });
+
+        // Create subtle animated background particles
+        function createParticles() {
+            const slides = document.querySelectorAll('.reveal .slides section');
+            slides.forEach(slide => {
+                const particlesBg = document.createElement('div');
+                particlesBg.className = 'particles-bg';
+
+                // Reduced to 8 particles for simpler, cleaner look
+                for (let i = 0; i < 8; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.width = Math.random() * 80 + 40 + 'px';
+                    particle.style.height = particle.style.width;
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 20 + 's';
+                    particle.style.animationDuration = (Math.random() * 10 + 20) + 's';
+                    particlesBg.appendChild(particle);
+                }
+
+                slide.insertBefore(particlesBg, slide.firstChild);
+            });
+        }
+
+        createParticles();
+
+        // Initialize charts when slides are shown
+        Reveal.on('slidechanged', event => {
+            // Funding chart (Slide 3)
+            if (event.indexh === 2 && !window.fundingChartCreated) {
+                const ctx = document.getElementById('fundingChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['TerraPower', 'NuScale', 'X-energy', 'Oklo', 'Kairos', 'Other Startups (75+)'],
+                        datasets: [{
+                            label: 'Total Funding ($M)',
+                            data: [830, 650, 440, 305, 350, 1200],
+                            backgroundColor: [
+                                'rgba(74, 144, 226, 0.8)',
+                                'rgba(74, 144, 226, 0.8)',
+                                'rgba(74, 144, 226, 0.8)',
+                                'rgba(72, 201, 176, 0.9)',
+                                'rgba(74, 144, 226, 0.8)',
+                                'rgba(74, 144, 226, 0.5)'
+                            ],
+                            borderColor: [
+                                'rgba(74, 144, 226, 1)',
+                                'rgba(74, 144, 226, 1)',
+                                'rgba(74, 144, 226, 1)',
+                                'rgba(72, 201, 176, 1)',
+                                'rgba(74, 144, 226, 1)',
+                                'rgba(74, 144, 226, 0.8)'
+                            ],
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeOutQuart'
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 14
+                                    },
+                                    callback: function(value) {
+                                        return '$' + value + 'M';
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 13
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 51, 102, 0.9)',
+                                titleColor: '#48C9B0',
+                                bodyColor: '#ffffff',
+                                borderColor: '#48C9B0',
+                                borderWidth: 2,
+                                padding: 12,
+                                displayColors: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'Funding: $' + context.parsed.y + 'M';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                window.fundingChartCreated = true;
+            }
+
+            // Revenue projection chart (Slide 7)
+            if (event.indexh === 6 && !window.revenueChartCreated) {
+                const ctx = document.getElementById('revenueChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2026', '2027', '2028', '2029', '2030'],
+                        datasets: [
+                            {
+                                label: 'Licensing & Regulatory',
+                                data: [3, 15, 38, 65, 75],
+                                backgroundColor: 'rgba(72, 201, 176, 0.4)',
+                                borderColor: 'rgba(72, 201, 176, 1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Safety & Simulation',
+                                data: [1, 6, 20, 35, 42],
+                                backgroundColor: 'rgba(74, 144, 226, 0.4)',
+                                borderColor: 'rgba(74, 144, 226, 1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Fuel Cycle',
+                                data: [0.5, 2, 9, 18, 23],
+                                backgroundColor: 'rgba(255, 193, 7, 0.4)',
+                                borderColor: 'rgba(255, 193, 7, 1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: 2500,
+                            easing: 'easeInOutQuart'
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
+                        },
+                        scales: {
+                            y: {
+                                stacked: true,
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 14
+                                    },
+                                    callback: function(value) {
+                                        return '$' + value + 'M';
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 14
+                                    },
+                                    padding: 15,
+                                    usePointStyle: true
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 51, 102, 0.95)',
+                                titleColor: '#48C9B0',
+                                bodyColor: '#ffffff',
+                                borderColor: '#48C9B0',
+                                borderWidth: 2,
+                                padding: 15,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': $' + context.parsed.y + 'M';
+                                    },
+                                    footer: function(tooltipItems) {
+                                        let sum = 0;
+                                        tooltipItems.forEach(function(tooltipItem) {
+                                            sum += tooltipItem.parsed.y;
+                                        });
+                                        return 'Total: $' + sum.toFixed(1) + 'M';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                window.revenueChartCreated = true;
+            }
+        });
+    </script>
+</body>
+</html>
