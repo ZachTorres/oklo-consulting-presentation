@@ -805,11 +805,11 @@
                     particlesBg.appendChild(atom);
                 }
 
-                // Create energy waves (3 pulsing energy fields)
+                // Create energy waves (3 small pulsing energy fields)
                 for (let i = 0; i < 3; i++) {
                     const energy = document.createElement('div');
                     energy.className = 'particle energy';
-                    const size = Math.random() * 100 + 120; // 120-220px waves
+                    const size = Math.random() * 20 + 25; // 25-45px waves (reduced from 120-220px)
                     energy.style.width = size + 'px';
                     energy.style.height = size + 'px';
                     energy.style.left = Math.random() * 100 + '%';
