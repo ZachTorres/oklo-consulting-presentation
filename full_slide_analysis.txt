@@ -1,0 +1,28 @@
+================================================================================
+OKLO - From Reactors to Revenue - Slide Analysis
+================================================================================
+
+Total Slides: 12
+
+
+================================================================================
+SLIDE 1
+================================================================================
+
+Text Content:
+  1. From Reactorsto Revenue
+  2. Oklo's Path to Profitability
+
+================================================================================
+SLIDE 2
+================================================================================
+
+Text Content:
+  1. New nuclear startups need help
+Traceback (most recent call last):
+  File "C:\Users\torre\Downloads\oklo-consulting-presentation\analyze_google_slides.py", line 51, in <module>
+    print(f"  {i}. {text}")
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u25cf' in position 5: character maps to <undefined>
